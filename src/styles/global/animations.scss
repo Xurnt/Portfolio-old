@@ -1,0 +1,49 @@
+.startAppearX
+{
+    animation:appearX 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes appearX
+{
+    
+    100%
+    {
+        left: 0;
+    }
+}
+
+
+.startLeaveLeft
+{
+    animation:leaveLeft 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes leaveLeft
+{
+    0%
+    {
+        left: 0;
+    }
+
+    100%
+    {
+        left: -100vw;
+    }
+}
+
+.startAppearY
+{
+    animation:appearY 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes appearY
+{
+    100%
+    {
+        top: 0;
+    }
+}
+
