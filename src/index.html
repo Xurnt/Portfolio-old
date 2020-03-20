@@ -54,10 +54,32 @@
     </section>
     <section class="skills" id="bottomPannel">
         <h1 class="skills__title">Mes compétences</h1>
-        <h2 class="skills_category">Développement web</h2>
-        <h2 class="skills_category">Graphisme</h2>
-        <h2 class="skills_category">Audiovisuel</h2>
-        <h2 class="skills_category">Communication/Gestion</h2>
+        <div class="skills__categories">      
+            <h2 class="skills__category" id="skills__dev">Développement web</h2>
+            <h2 class="skills__category" id="skills__graph">Graphisme</h2>
+            <h2 class="skills__category" id="skills__audio">Audiovisuel</h2>
+            <h2 class="skills__category" id="skills__other">Communication/Gestion</h2>
+        </div>
+        <h2 class="skills__actual"></h2>
+        <div class="skills__carousel">
+            <img src="https://dummyimage.com/100x100/ff0000/fff" alt="" class="skills_button" id="skills__left">
+            <figure >
+                <img src="" alt="" id="skills__firstImage">
+                <figcaption id="skills__firstText"></figcaption>
+            </figure>
+            <figure>
+                <img src="" alt="" id="skills__secondImage">
+                <figcaption id="skills__secondText"></figcaption>
+            </figure>
+            <figure>
+                <img src="" alt="" id="skills__thirdImage">
+                <figcaption id="skills__thirdText"></figcaption>
+            </figure>
+            <img src="https://dummyimage.com/100x100/ff0000/fff" alt="" class="skills_button" id="skills__right">
+
+        </div>
+
+  
 
 
 
@@ -69,7 +91,6 @@
         <div class="accessibility"></div>
     <footer class="layout__bottom">
         <script src="scripts/app.js"></script>
-        <script src="scripts/main.js"></script>
     </footer>
 </body>
 </html>
