@@ -123,29 +123,31 @@ var Portfolio = function Portfolio(options) {
   var speedFact = 20;
   var backgroundFactor;
   var zoomLimit = [1, backgroundFactor];
-  var mousePosition = ['a', 'a'];
-  var mousePositionTemp = ['a', 'a'];
+  var mousePosition = ["a", "a"];
+  var mousePositionTemp = ["a", "a"];
   var center;
   var movementActive;
-  var start = 'true';
-  var imageSize = ['a', 'a'];
+  var start = "true";
+  var imageSize = ["a", "a"];
   var backgroundImage = new Image();
   var backgroundImageRatio;
   var screenRatio;
   var mobile;
-  var steps = ['a', 'a'];
-  var backgroundActualPosition = ['a', 'a'];
+  var steps = ["a", "a"];
+  var backgroundActualPosition = ["a", "a"];
   var mode;
   var colorDecimal = [0, 0, 0];
   var colorHexadecimal;
   var tempColor = [0, 0];
-  var stepColor = ['a', 'a']; //fonctions publiques
+  var stepColor = ["a", "a"]; //fonctions publiques
 
   function init(srcImg, backgroundValue) {
+    printCarousel();
+    carousel();
     backgroundFactor = backgroundValue;
     mode = "ARRET";
-    document.getElementById('mode').innerHTML = mode;
-    document.querySelector('main').style.background = '#000000';
+    document.getElementById("mode").innerHTML = mode;
+    document.querySelector("main").style.background = "#000000";
 
     if (screen.height > screen.width) {
       mobile = true;
@@ -153,7 +155,7 @@ var Portfolio = function Portfolio(options) {
       mobile = false;
     }
 
-    document.getElementById('background').style.backgroundImage = "url(" + srcImg + ")";
+    document.getElementById("background").style.backgroundImage = "url(" + srcImg + ")";
     center = [window.innerWidth / 2, window.innerHeight / 2];
     backgroundImage.src = srcImg;
 
@@ -164,21 +166,21 @@ var Portfolio = function Portfolio(options) {
       if (screenRatio > backgroundImageRatio) {
         imageSize[1] = window.innerHeight * backgroundFactor;
         imageSize[0] = imageSize[1] / backgroundImageRatio;
-        document.getElementById('background').style.backgroundSize = (backgroundFactor * 100 * screenRatio / backgroundImageRatio).toString() + '%';
+        document.getElementById("background").style.backgroundSize = (backgroundFactor * 100 * screenRatio / backgroundImageRatio).toString() + "%";
       } else {
         imageSize[0] = window.innerWidth * backgroundFactor;
         imageSize[1] = imageSize[0] * backgroundImageRatio;
-        document.getElementById('background').style.backgroundSize = (backgroundFactor * 100).toString() + '%';
+        document.getElementById("background").style.backgroundSize = (backgroundFactor * 100).toString() + "%";
       }
 
-      document.getElementById('background').style.backgroundPositionX = ((window.innerWidth - imageSize[0]) / 2).toString() + 'px';
-      document.getElementById('background').style.backgroundPositionY = ((window.innerHeight - imageSize[1]) / 2).toString() + 'px';
+      document.getElementById("background").style.backgroundPositionX = ((window.innerWidth - imageSize[0]) / 2).toString() + "px";
+      document.getElementById("background").style.backgroundPositionY = ((window.innerHeight - imageSize[1]) / 2).toString() + "px";
       console.log(imageSize);
-      document.getElementById('background').addEventListener("click", function (event) {
+      document.getElementById("background").addEventListener("click", function (event) {
         toogleMovement();
       });
       backToMap();
-      ratioImages('profilePicture'); // zoom('wheel');
+      ratioImages("profilePicture"); // zoom('wheel');
 
       stepColor = [-(window.innerWidth - imageSize[0]) / 2 / 255, -(window.innerHeight - imageSize[1]) / 2 / 255];
       console.log(stepColor);
@@ -193,7 +195,7 @@ var Portfolio = function Portfolio(options) {
     //            {
     if (start) {
       movementActive = setInterval(function () {
-        vectorDirectionPC('mousemove');
+        vectorDirectionPC("mousemove");
       }, 17); //17 ms = 60fps
 
       mode = "DÉPLACEMENT";
@@ -205,7 +207,7 @@ var Portfolio = function Portfolio(options) {
     } //          }
 
 
-    document.getElementById('mode').innerHTML = mode;
+    document.getElementById("mode").innerHTML = mode;
   }
 
   function vectorDirectionPC(action) {
@@ -221,40 +223,40 @@ var Portfolio = function Portfolio(options) {
   }
 
   function moveBackground() {
-    steps[0] = (parseInt(document.getElementById('background').style.backgroundPositionX.replace('px', '')) - mousePosition[0] / speedFact).toString() + 'px';
-    steps[1] = (parseInt(document.getElementById('background').style.backgroundPositionY.replace('px', '')) - mousePosition[1] / speedFact).toString() + 'px';
-    backgroundActualPosition[0] = parseInt(document.getElementById('background').style.backgroundPositionX.replace('px', ''));
-    backgroundActualPosition[1] = parseInt(document.getElementById('background').style.backgroundPositionY.replace('px', ''));
+    steps[0] = (parseInt(document.getElementById("background").style.backgroundPositionX.replace("px", "")) - mousePosition[0] / speedFact).toString() + "px";
+    steps[1] = (parseInt(document.getElementById("background").style.backgroundPositionY.replace("px", "")) - mousePosition[1] / speedFact).toString() + "px";
+    backgroundActualPosition[0] = parseInt(document.getElementById("background").style.backgroundPositionX.replace("px", ""));
+    backgroundActualPosition[1] = parseInt(document.getElementById("background").style.backgroundPositionY.replace("px", ""));
 
     if (backgroundActualPosition[0] > 0) {
-      document.getElementById('leftPannel').classList.add('startAppearX');
-      document.getElementById('background').style.backgroundPositionX = '0px';
+      document.getElementById("leftPannel").classList.add("startAppearX");
+      document.getElementById("background").style.backgroundPositionX = "0px";
       toogleMovement();
     }
 
     if (backgroundActualPosition[0] < -(imageSize[0] - window.innerWidth)) {
       // console.log('a');
-      document.getElementById('rightPannel').classList.add('startAppearX');
-      document.getElementById('background').style.backgroundPositionX = -(imageSize[0] - window.innerWidth) + 'px';
+      document.getElementById("rightPannel").classList.add("startAppearX");
+      document.getElementById("background").style.backgroundPositionX = -(imageSize[0] - window.innerWidth) + "px";
       toogleMovement();
     }
 
     if (backgroundActualPosition[1] > 0) {
-      document.getElementById('background').style.backgroundPositionY = '0px';
+      document.getElementById("background").style.backgroundPositionY = "0px";
     }
 
     if (backgroundActualPosition[1] < -(imageSize[1] - window.innerHeight)) {
-      document.getElementById('bottomPannel').classList.add('startAppearY');
-      document.getElementById('background').style.backgroundPositionY = -(imageSize[1] - window.innerHeight) + 'px';
+      document.getElementById("bottomPannel").classList.add("startAppearY");
+      document.getElementById("background").style.backgroundPositionY = -(imageSize[1] - window.innerHeight) + "px";
       toogleMovement();
     }
 
     if ((backgroundActualPosition[0] < 0 || mousePosition[0] >= 0) && (backgroundActualPosition[0] > -(imageSize[0] - window.innerWidth) || mousePosition[0] <= 0)) {
-      document.getElementById('background').style.backgroundPositionX = steps[0];
+      document.getElementById("background").style.backgroundPositionX = steps[0];
     }
 
     if ((backgroundActualPosition[1] < 0 || mousePosition[1] >= 0) && (backgroundActualPosition[1] > -(imageSize[1] - window.innerHeight) || mousePosition[1] <= 0)) {
-      document.getElementById('background').style.backgroundPositionY = steps[1];
+      document.getElementById("background").style.backgroundPositionY = steps[1];
     }
 
     color(); //console.log(backgroundActualPosition[0]);
@@ -284,9 +286,9 @@ var Portfolio = function Portfolio(options) {
         backgroundFactor += sign * 0.1;
 
         if (screenRatio > backgroundImageRatio) {
-          document.getElementById('background').style.backgroundSize = (backgroundFactor * 100 * screenRatio / backgroundImageRatio).toString() + '%';
+          document.getElementById("background").style.backgroundSize = (backgroundFactor * 100 * screenRatio / backgroundImageRatio).toString() + "%";
         } else {
-          document.getElementById('background').style.backgroundSize = (backgroundFactor * 100).toString() + '%';
+          document.getElementById("background").style.backgroundSize = (backgroundFactor * 100).toString() + "%";
         }
       }
     });
@@ -294,8 +296,8 @@ var Portfolio = function Portfolio(options) {
 
 
   function color() {
-    tempColor[0] = (parseInt(document.getElementById('background').style.backgroundPositionX.replace('px', '')) - (window.innerWidth - imageSize[0]) / 2) / stepColor[0];
-    tempColor[1] = (parseInt(document.getElementById('background').style.backgroundPositionY.replace('px', '')) - (window.innerHeight - imageSize[1]) / 2) / stepColor[1];
+    tempColor[0] = (parseInt(document.getElementById("background").style.backgroundPositionX.replace("px", "")) - (window.innerWidth - imageSize[0]) / 2) / stepColor[0];
+    tempColor[1] = (parseInt(document.getElementById("background").style.backgroundPositionY.replace("px", "")) - (window.innerHeight - imageSize[1]) / 2) / stepColor[1];
 
     if (tempColor[0] < 0) {
       colorDecimal[0] = -Math.round(tempColor[0]);
@@ -309,58 +311,168 @@ var Portfolio = function Portfolio(options) {
       colorDecimal[2] = 0;
     }
 
-    colorHexadecimal = '#';
+    colorHexadecimal = "#";
 
     if (colorDecimal[0] == 0) {
-      colorHexadecimal += '00';
+      colorHexadecimal += "00";
     } else if (colorDecimal[0] <= 16) {
-      colorHexadecimal += '0' + colorDecimal[0].toString(16);
+      colorHexadecimal += "0" + colorDecimal[0].toString(16);
     } else {
       colorHexadecimal += colorDecimal[0].toString(16);
     }
 
     if (colorDecimal[1] == 0) {
-      colorHexadecimal += '00';
+      colorHexadecimal += "00";
     } else if (colorDecimal[1] <= 16) {
-      colorHexadecimal += '0' + colorDecimal[1].toString(16);
+      colorHexadecimal += "0" + colorDecimal[1].toString(16);
     } else {
       colorHexadecimal += colorDecimal[1].toString(16);
     }
 
     if (colorDecimal[2] == 0) {
-      colorHexadecimal += '00';
+      colorHexadecimal += "00";
     } else if (colorDecimal[2] <= 16) {
-      colorHexadecimal += '0' + colorDecimal[2].toString(16);
+      colorHexadecimal += "0" + colorDecimal[2].toString(16);
     } else {
       colorHexadecimal += colorDecimal[2].toString(16);
     }
 
     console.log(colorHexadecimal);
-    document.querySelector('main').style.background = colorHexadecimal;
+    document.querySelector("main").style.background = colorHexadecimal;
   }
 
   function backToMap() {
-    document.getElementById('exitPresentation').addEventListener('click', function () {
-      document.getElementById('background').style.backgroundPositionX = ((window.innerWidth - imageSize[0]) / 2).toString() + 'px';
-      document.getElementById('background').style.backgroundPositionY = ((window.innerHeight - imageSize[1]) / 2).toString() + 'px';
-      document.getElementById('leftPannel').classList.remove('startAppearX');
-      document.getElementById('leftPannel').classList.add('startLeaveLeft');
+    document.getElementById("exitPresentation").addEventListener("click", function () {
+      document.getElementById("background").style.backgroundPositionX = ((window.innerWidth - imageSize[0]) / 2).toString() + "px";
+      document.getElementById("background").style.backgroundPositionY = ((window.innerHeight - imageSize[1]) / 2).toString() + "px";
+      document.getElementById("leftPannel").classList.remove("startAppearX");
+      document.getElementById("leftPannel").classList.add("startLeaveLeft");
       setTimeout(function () {
-        document.getElementById('leftPannel').classList.remove('startLeaveLeft');
+        document.getElementById("leftPannel").classList.remove("startLeaveLeft");
       }, 1000);
     });
   }
 
   function ratioImages(image) {
-    console.log(document.getElementById(image).clientWidth.toString() + 'px');
-    document.getElementById(image).style.height = document.getElementById(image).clientWidth.toString() + 'px';
-    console.log(document.getElementById(image).clientHeight.toString() + 'px');
+    document.getElementById(image).style.height = document.getElementById(image).clientWidth.toString() + "px";
+  }
+
+  var tabCarouselSkills = [{
+    name: "a",
+    category: "dev",
+    src: "https://dummyimage.com/200x200/eb17eb/fff"
+  }, {
+    name: "b",
+    category: "dev",
+    src: "https://dummyimage.com/200x200/eb17eb/fff"
+  }, {
+    name: "c",
+    category: "dev",
+    src: "https://dummyimage.com/200x200/eb17eb/fff"
+  }, {
+    name: "d",
+    category: "graph",
+    src: "https://dummyimage.com/200x200/17eb7d/fff"
+  }, {
+    name: "e",
+    category: "graph",
+    src: "https://dummyimage.com/200x200/17eb7d/fff"
+  }, {
+    name: "f",
+    category: "audio",
+    src: "https://dummyimage.com/200x200/eb8f17/fff"
+  }, {
+    name: "g",
+    category: "audio",
+    src: "https://dummyimage.com/200x200/eb8f17/fff"
+  }, {
+    name: "h",
+    category: "audio",
+    src: "https://dummyimage.com/200x200/eb8f17/fff"
+  }, {
+    name: "i",
+    category: "other",
+    src: "https://dummyimage.com/200x200/1717eb/fff"
+  }, {
+    name: "j",
+    category: "other",
+    src: "https://dummyimage.com/200x200/1717eb/fff"
+  }];
+  var centralCarouselSkills = 0;
+  var lengthCarouselSkills = tabCarouselSkills.length;
+
+  function carousel() {
+    carouselButton("skills__dev");
+    carouselButton("skills__graph");
+    carouselButton("skills__audio");
+    carouselButton("skills__other");
+    document.getElementById("skills__left").addEventListener("click", function () {
+      if (centralCarouselSkills == 0) {
+        centralCarouselSkills = lengthCarouselSkills - 1;
+      } else {
+        centralCarouselSkills--;
+      }
+
+      printCarousel();
+    });
+    document.getElementById("skills__right").addEventListener("click", function () {
+      if (centralCarouselSkills == lengthCarouselSkills - 1) {
+        centralCarouselSkills = 0;
+      } else {
+        centralCarouselSkills++;
+      }
+
+      printCarousel();
+    });
+  }
+
+  function carouselButton(button) {
+    document.getElementById(button).addEventListener("click", function () {
+      changeCentral = true;
+
+      for (var i = 0; i < lengthCarouselSkills; i++) {
+        if (button.replace("skills__", "") == tabCarouselSkills[i]["category"] && changeCentral) {
+          centralCarouselSkills = i + 1;
+          changeCentral = false;
+        }
+      }
+
+      printCarousel();
+    });
+  }
+
+  function printCarousel() {
+    document.getElementById("skills__secondImage").src = tabCarouselSkills[centralCarouselSkills]["src"];
+    document.getElementById("skills__secondText").innerHTML = tabCarouselSkills[centralCarouselSkills]["category"];
+
+    if (centralCarouselSkills == 0) {
+      document.getElementById("skills__firstImage").src = tabCarouselSkills[lengthCarouselSkills - 1]["src"];
+      document.getElementById("skills__firstText").innerHTML = tabCarouselSkills[lengthCarouselSkills - 1]["category"];
+      document.getElementById("skills__thirdImage").src = tabCarouselSkills[centralCarouselSkills + 1]["src"];
+      document.getElementById("skills__thirdText").innerHTML = tabCarouselSkills[centralCarouselSkills + 1]["category"];
+    } else if (centralCarouselSkills == lengthCarouselSkills - 1) {
+      document.getElementById("skills__firstImage").src = tabCarouselSkills[centralCarouselSkills - 1]["src"];
+      document.getElementById("skills__firstText").innerHTML = tabCarouselSkills[centralCarouselSkills - 1]["category"];
+      document.getElementById("skills__thirdImage").src = tabCarouselSkills[0]["src"];
+      document.getElementById("skills__thirdText").innerHTML = tabCarouselSkills[0]["category"];
+    } else {
+      document.getElementById("skills__firstImage").src = tabCarouselSkills[centralCarouselSkills - 1]["src"];
+      document.getElementById("skills__firstText").innerHTML = tabCarouselSkills[centralCarouselSkills - 1]["category"];
+      document.getElementById("skills__thirdImage").src = tabCarouselSkills[centralCarouselSkills + 1]["src"];
+      document.getElementById("skills__thirdText").innerHTML = tabCarouselSkills[centralCarouselSkills + 1]["category"];
+    }
   }
 
   return {
     init: init
   };
-};
+}; //START
+
+
+document.addEventListener("DOMContentLoaded", function (event) {
+  var portfolio = new Portfolio();
+  portfolio.init("assets/img/imageFond.png", 3);
+});
 },{}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -389,7 +501,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51069" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51659" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
