@@ -5,6 +5,7 @@ let Portfolio = function(options) {
   let backgroundFactor;
   let zoomLimit = [1, backgroundFactor];
   let mousePosition = ["a", "a"];
+  let mousePositionPrev = ["a", "a"];
   let mousePositionTemp = ["a", "a"];
   let center;
   let movementActive;
@@ -31,7 +32,7 @@ let Portfolio = function(options) {
     backgroundFactor = backgroundValue;
 
     mode = "ARRET";
-    document.getElementById("mode").innerHTML = mode;
+    //document.getElementById("mode").innerHTML = mode;
     document.querySelector("main").style.background = "#000000";
     if (screen.height > screen.width) {
       mobile = true;
@@ -72,6 +73,11 @@ let Portfolio = function(options) {
         .addEventListener("click", function(event) {
           toogleMovement();
         });
+        document
+        .getElementById("background")
+        .addEventListener("touchstart", function(event) {
+          toogleMovement();
+        });
       backToMap();
 
       ratioImages("profilePicture");
@@ -80,30 +86,75 @@ let Portfolio = function(options) {
         -(window.innerWidth - imageSize[0]) / 2 / 255,
         -(window.innerHeight - imageSize[1]) / 2 / 255
       ];
-      console.log(stepColor);
+  //    console.log(stepColor);
     };
   }
 
   //fonctions privées
 
   function toogleMovement() {
-    //            if(mobile)
-    //            {}
-    //            else
-    //            {
-    if (start) {
-      movementActive = setInterval(function() {
-        vectorDirectionPC("mousemove");
-      }, 17); //17 ms = 60fps
-      mode = "DÉPLACEMENT";
-      start = false;
-    } else {
-      clearInterval(movementActive);
-      start = true;
-      mode = "ARRET";
+    if (mobile){
+      handleTouch();
+    }else{
+      if (start) {
+        movementActive=setInterval(function(){
+          vectorDirectionPC("mousemove");
+
+
+    }, 17); //17 ms = 60fps
+    mode = "DÉPLACEMENT";
+    start = false;
+  } else {
+    clearInterval(movementActive);
+    start = true;
+    mode = "ARRET";
+  }
     }
+
     //          }
-    document.getElementById("mode").innerHTML = mode;
+   // document.getElementById("mode").innerHTML = mode;
+  }
+  
+  let touchstartX = 0;
+  let touchstartY = 0;
+  let touchendX = 0;
+  let touchendY = 0;
+  let xDiff;
+  let yDiff;
+  
+  function handleTouch(){
+
+    document.getElementById("background").addEventListener('touchstart', function(event) {
+      touchstartX = event.changedTouches[0].screenX;
+      touchstartY = event.changedTouches[0].screenY;
+  }, false);
+  
+  document.getElementById("background").addEventListener('touchmove', function(event) {
+      touchendX = event.changedTouches[0].screenX;
+      touchendY = event.changedTouches[0].screenY;
+      xDiff=touchendX-touchstartX;
+      yDiff=touchendY-touchstartY;
+      backgroundActualPosition[0]=(parseInt(document.getElementById("background").style.backgroundPositionX.replace("px",""))+xDiff);
+      backgroundActualPosition[1]=(parseInt(document.getElementById("background").style.backgroundPositionY.replace("px",""))+yDiff);
+
+      document.getElementById("mode").innerHTML=xDiff;
+      swipe();
+      touchstartX=touchendX;
+      touchstartY=touchendY;
+
+  }, false); 
+  }
+
+  
+
+    
+
+  function swipe(){
+    
+    document.getElementById("background").style.backgroundPositionX=backgroundActualPosition[0].toString()+"px";
+    document.getElementById("background").style.backgroundPositionY=backgroundActualPosition[1].toString()+"px";
+    document.getElementById("mode").innerHTML=document.getElementById("background").style.backgroundPositionX;
+    limits();
   }
 
   function vectorDirectionPC(action) {
@@ -150,29 +201,8 @@ let Portfolio = function(options) {
         .style.backgroundPositionY.replace("px", "")
     );
 
-    if (backgroundActualPosition[0] > 0) {
-      document.getElementById("leftPannel").classList.add("startAppearX");
-      document.getElementById("background").style.backgroundPositionX = "0px";
-
-      toogleMovement();
-    }
-    if (backgroundActualPosition[0] < -(imageSize[0] - window.innerWidth)) {
-      // console.log('a');
-      document.getElementById("rightPannel").classList.add("startAppearX");
-      document.getElementById("background").style.backgroundPositionX =
-        -(imageSize[0] - window.innerWidth) + "px";
-      toogleMovement();
-    }
-
-    if (backgroundActualPosition[1] > 0) {
-      document.getElementById("background").style.backgroundPositionY = "0px";
-    }
-    if (backgroundActualPosition[1] < -(imageSize[1] - window.innerHeight)) {
-      document.getElementById("bottomPannel").classList.add("startAppearY");
-      document.getElementById("background").style.backgroundPositionY =
-        -(imageSize[1] - window.innerHeight) + "px";
-      toogleMovement();
-    }
+   limits()
+   color();
 
     if (
       (backgroundActualPosition[0] < 0 || mousePosition[0] >= 0) &&
@@ -190,46 +220,46 @@ let Portfolio = function(options) {
       document.getElementById("background").style.backgroundPositionY =
         steps[1];
     }
-    color();
+
+    
     //console.log(backgroundActualPosition[0]);
     //  console.log(imageSize[0]-window.innerWidth);
   }
 
-  function zoom(action) {
-    document.addEventListener(action, function(event) {
-      event.preventDefault();
-      // console.log(event.pageX);
-      // console.log(event.pageY);
+  function limits(){
 
-      let sign = -event.deltaY / Math.abs(event.deltaY);
-      let canScroll = false;
-      if (
-        backgroundFactor >= zoomLimit[0] &&
-        backgroundFactor <= zoomLimit[1]
-      ) {
-        canScroll = true;
-      } else {
-        if (backgroundFactor < zoomLimit[0] && sign > 0) {
-          canScroll = true;
-        } else if (backgroundFactor > zoomLimit[1] && sign < 0) {
-          canScroll = true;
-        }
+    if (backgroundActualPosition[0] > 0) {
+    document.getElementById("mode").innerHTML="AAAAAAAAA";
+
+      document.getElementById("leftPannel").classList.add("startAppearX");
+      document.getElementById("background").style.backgroundPositionX = "0px";
+      if (!mobile) {
+        toogleMovement();
       }
-      if (canScroll) {
-        vectorDirectionPC(action);
-        backgroundFactor += sign * 0.1;
-        if (screenRatio > backgroundImageRatio) {
-          document.getElementById("background").style.backgroundSize =
-            (
-              (backgroundFactor * 100 * screenRatio) /
-              backgroundImageRatio
-            ).toString() + "%";
-        } else {
-          document.getElementById("background").style.backgroundSize =
-            (backgroundFactor * 100).toString() + "%";
-        }
+    }
+    if (backgroundActualPosition[0] < -(imageSize[0] - window.innerWidth)) {
+      // console.log('a');
+      document.getElementById("rightPannel").classList.add("startAppearX");
+      document.getElementById("background").style.backgroundPositionX =
+        -(imageSize[0] - window.innerWidth) + "px";
+      if (!mobile) {
+        toogleMovement(); 
       }
-    });
+    }
+
+    if (backgroundActualPosition[1] > 0) {
+
+      document.getElementById("background").style.backgroundPositionY = "0px";
+    }
+    if (backgroundActualPosition[1] < -(imageSize[1] - window.innerHeight)) {
+
+      document.getElementById("bottomPannel").classList.add("startAppearY");
+      document.getElementById("background").style.backgroundPositionY =
+        -(imageSize[1] - window.innerHeight) + "px";
+      if (!mobile) {
+        toogleMovement();    
+      }
+    }
   }
 
   //.log(document.querySelector('main').style.backgroundPosition);
@@ -287,7 +317,7 @@ let Portfolio = function(options) {
     } else {
       colorHexadecimal += colorDecimal[2].toString(16);
     }
-    console.log(colorHexadecimal);
+   // console.log(colorHexadecimal);
     document.querySelector("main").style.background = colorHexadecimal;
   }
 
@@ -451,5 +481,5 @@ let Portfolio = function(options) {
 //START
 document.addEventListener("DOMContentLoaded", function(event) {
   let portfolio = new Portfolio();
-  portfolio.init("assets/img/imageFond.png", 3);
+  portfolio.init("assets/img/profil.jpg", 3);
 });
