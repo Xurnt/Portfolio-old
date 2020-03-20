@@ -73,7 +73,7 @@ let Portfolio = function(options) {
         .addEventListener("click", function(event) {
           toogleMovement();
         });
-        document
+      document
         .getElementById("background")
         .addEventListener("touchstart", function(event) {
           toogleMovement();
@@ -86,74 +86,87 @@ let Portfolio = function(options) {
         -(window.innerWidth - imageSize[0]) / 2 / 255,
         -(window.innerHeight - imageSize[1]) / 2 / 255
       ];
-  //    console.log(stepColor);
+      //    console.log(stepColor);
     };
   }
 
   //fonctions privées
 
   function toogleMovement() {
-    if (mobile){
+    if (mobile) {
       handleTouch();
-    }else{
+    } else {
       if (start) {
-        movementActive=setInterval(function(){
+        movementActive = setInterval(function() {
           vectorDirectionPC("mousemove");
-
-
-    }, 17); //17 ms = 60fps
-    mode = "DÉPLACEMENT";
-    start = false;
-  } else {
-    clearInterval(movementActive);
-    start = true;
-    mode = "ARRET";
-  }
+        }, 17); //17 ms = 60fps
+        mode = "DÉPLACEMENT";
+        start = false;
+      } else {
+        clearInterval(movementActive);
+        start = true;
+        mode = "ARRET";
+      }
     }
 
     //          }
-   // document.getElementById("mode").innerHTML = mode;
+    // document.getElementById("mode").innerHTML = mode;
   }
-  
+
   let touchstartX = 0;
   let touchstartY = 0;
   let touchendX = 0;
   let touchendY = 0;
   let xDiff;
   let yDiff;
-  
-  function handleTouch(){
 
-    document.getElementById("background").addEventListener('touchstart', function(event) {
-      touchstartX = event.changedTouches[0].screenX;
-      touchstartY = event.changedTouches[0].screenY;
-  }, false);
-  
-  document.getElementById("background").addEventListener('touchmove', function(event) {
-      touchendX = event.changedTouches[0].screenX;
-      touchendY = event.changedTouches[0].screenY;
-      xDiff=touchendX-touchstartX;
-      yDiff=touchendY-touchstartY;
-      backgroundActualPosition[0]=(parseInt(document.getElementById("background").style.backgroundPositionX.replace("px",""))+xDiff);
-      backgroundActualPosition[1]=(parseInt(document.getElementById("background").style.backgroundPositionY.replace("px",""))+yDiff);
+  function handleTouch() {
+    document.getElementById("background").addEventListener(
+      "touchstart",
+      function(event) {
+        touchstartX = event.changedTouches[0].screenX;
+        touchstartY = event.changedTouches[0].screenY;
+      },
+      false
+    );
 
-      document.getElementById("mode").innerHTML=xDiff;
-      swipe();
-      touchstartX=touchendX;
-      touchstartY=touchendY;
+    document.getElementById("background").addEventListener(
+      "touchmove",
+      function(event) {
+        touchendX = event.changedTouches[0].screenX;
+        touchendY = event.changedTouches[0].screenY;
+        xDiff = touchendX - touchstartX;
+        yDiff = touchendY - touchstartY;
+        backgroundActualPosition[0] =
+          parseInt(
+            document
+              .getElementById("background")
+              .style.backgroundPositionX.replace("px", "")
+          ) + xDiff;
+        backgroundActualPosition[1] =
+          parseInt(
+            document
+              .getElementById("background")
+              .style.backgroundPositionY.replace("px", "")
+          ) + yDiff;
 
-  }, false); 
+        document.getElementById("mode").innerHTML = xDiff;
+        swipe();
+        touchstartX = touchendX;
+        touchstartY = touchendY;
+      },
+      false
+    );
   }
 
-  
-
-    
-
-  function swipe(){
-    
-    document.getElementById("background").style.backgroundPositionX=backgroundActualPosition[0].toString()+"px";
-    document.getElementById("background").style.backgroundPositionY=backgroundActualPosition[1].toString()+"px";
-    document.getElementById("mode").innerHTML=document.getElementById("background").style.backgroundPositionX;
+  function swipe() {
+    document.getElementById("background").style.backgroundPositionX =
+      backgroundActualPosition[0].toString() + "px";
+    document.getElementById("background").style.backgroundPositionY =
+      backgroundActualPosition[1].toString() + "px";
+    document.getElementById("mode").innerHTML = document.getElementById(
+      "background"
+    ).style.backgroundPositionX;
     limits();
   }
 
@@ -201,8 +214,8 @@ let Portfolio = function(options) {
         .style.backgroundPositionY.replace("px", "")
     );
 
-   limits()
-   color();
+    limits();
+    color();
 
     if (
       (backgroundActualPosition[0] < 0 || mousePosition[0] >= 0) &&
@@ -221,15 +234,13 @@ let Portfolio = function(options) {
         steps[1];
     }
 
-    
     //console.log(backgroundActualPosition[0]);
     //  console.log(imageSize[0]-window.innerWidth);
   }
 
-  function limits(){
-
+  function limits() {
     if (backgroundActualPosition[0] > 0) {
-    document.getElementById("mode").innerHTML="AAAAAAAAA";
+      document.getElementById("mode").innerHTML = "AAAAAAAAA";
 
       document.getElementById("leftPannel").classList.add("startAppearX");
       document.getElementById("background").style.backgroundPositionX = "0px";
@@ -243,21 +254,19 @@ let Portfolio = function(options) {
       document.getElementById("background").style.backgroundPositionX =
         -(imageSize[0] - window.innerWidth) + "px";
       if (!mobile) {
-        toogleMovement(); 
+        toogleMovement();
       }
     }
 
     if (backgroundActualPosition[1] > 0) {
-
       document.getElementById("background").style.backgroundPositionY = "0px";
     }
     if (backgroundActualPosition[1] < -(imageSize[1] - window.innerHeight)) {
-
       document.getElementById("bottomPannel").classList.add("startAppearY");
       document.getElementById("background").style.backgroundPositionY =
         -(imageSize[1] - window.innerHeight) + "px";
       if (!mobile) {
-        toogleMovement();    
+        toogleMovement();
       }
     }
   }
@@ -317,7 +326,7 @@ let Portfolio = function(options) {
     } else {
       colorHexadecimal += colorDecimal[2].toString(16);
     }
-   // console.log(colorHexadecimal);
+    // console.log(colorHexadecimal);
     document.querySelector("main").style.background = colorHexadecimal;
   }
 
@@ -348,52 +357,52 @@ let Portfolio = function(options) {
     {
       name: "a",
       category: "dev",
-      src: "https://dummyimage.com/200x200/eb17eb/fff"
+      src: "./assets/img/fr.jpg"
     },
     {
       name: "b",
       category: "dev",
-      src: "https://dummyimage.com/200x200/eb17eb/fff"
+      src: "./assets/img/fr.jpg"
     },
     {
       name: "c",
       category: "dev",
-      src: "https://dummyimage.com/200x200/eb17eb/fff"
+      src: "./assets/img/fr.jpg"
     },
     {
       name: "d",
       category: "graph",
-      src: "https://dummyimage.com/200x200/17eb7d/fff"
+      src: "./assets/img/eng.jpg"
     },
     {
       name: "e",
       category: "graph",
-      src: "https://dummyimage.com/200x200/17eb7d/fff"
+      src: "./assets/img/eng.jpg"
     },
     {
       name: "f",
       category: "audio",
-      src: "https://dummyimage.com/200x200/eb8f17/fff"
+      src: "./assets/img/esp.jpg"
     },
     {
       name: "g",
       category: "audio",
-      src: "https://dummyimage.com/200x200/eb8f17/fff"
+      src: "./assets/img/esp.jpg"
     },
     {
       name: "h",
       category: "audio",
-      src: "https://dummyimage.com/200x200/eb8f17/fff"
+      src: "./assets/img/esp.jpg"
     },
     {
       name: "i",
       category: "other",
-      src: "https://dummyimage.com/200x200/1717eb/fff"
+      src: "./assets/img/profil.jpg"
     },
     {
       name: "j",
       category: "other",
-      src: "https://dummyimage.com/200x200/1717eb/fff"
+      src: "./assets/img/profil.jpg"
     }
   ];
   let centralCarouselSkills = 0;
@@ -481,5 +490,5 @@ let Portfolio = function(options) {
 //START
 document.addEventListener("DOMContentLoaded", function(event) {
   let portfolio = new Portfolio();
-  portfolio.init("assets/img/profil.jpg", 3);
+  portfolio.init("assets/img/imageFond.png", 3);
 });
