@@ -1,9 +1,74 @@
-.creations
-{
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
-    left: 100vw;
-    background-image:linear-gradient(to right,#ffbac3,#f21d39);
-    z-index: 20;
+.creations {
+  padding: 3%;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  left: 100vw;
+  background-image: linear-gradient(to right, white, #f21d39);
+  z-index: 20;
+  display: grid;
+  grid-template-rows: 1fr 4fr 1fr 1fr;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "top"
+    "content" "button" "menu";
+}
+
+.creations__title {
+  grid-area: top;
+  font-family: Ballet Harmony;
+  font-size: 9vw;
+  text-align: center;
+}
+
+.creations__menu {
+  grid-area: menu;
+}
+
+.creations__articles {
+  grid-area: content;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.creations__list {
+  overflow: hidden;
+  height: 100%;
+}
+
+.creations__buttons {
+  height: 20%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-basis: 20%;
+}
+
+.creations__button {
+  cursor: pointer;
+  background-color: transparent;
+  font-family: Comfortaa;
+  font-size: 4vw;
+  border: none;
+  padding: 2%;
+}
+
+.creations__leave {
+  grid-area: button;
+}
+
+@media (min-width: 1000px), (max-height: 450px) {
+  .creations {
+    grid-template-rows: 1fr 4fr 1fr;
+    grid-template-columns: 4fr 1fr;
+    grid-template-areas:
+      "top menu"
+      "content menu"
+      "button button";
+  }
+
+  .creations__list {
+    grid-area: content;
+  }
 }

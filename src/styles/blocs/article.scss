@@ -1,0 +1,46 @@
+.article {
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+  flex-basis: 70%;
+}
+
+.article__title {
+  font-family: Comfortaa;
+  font-size: 4vw;
+  text-align: center;
+}
+
+.article__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  padding: 2%;
+}
+
+.article__image {
+  width: 50%;
+  height: auto;
+  padding: 3%;
+}
+
+.article__description {
+  font-family: Comfortaa;
+  font-size: 2vw;
+  height: 100%;
+  width: 50%;
+  text-align: center;
+  white-space: normal;
+  word-break: break-all;
+}
+
+@media (min-width: 1000px), (max-height: 450px) {
+  .article__content {
+    flex-direction: row;
+  }
+  .article__description {
+    width: 50%;
+  }
+}

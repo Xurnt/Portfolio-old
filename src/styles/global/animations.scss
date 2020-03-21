@@ -1,67 +1,66 @@
-.startAppearX
-{
-    animation:appearX 1s;
-    animation-fill-mode: forwards;
+.startAppearX {
+  animation: appearX 1s;
+  animation-fill-mode: forwards;
 }
 
-@keyframes appearX
-{
-    
-    100%
-    {
-        left: 0;
-    }
+@keyframes appearX {
+  100% {
+    left: 0;
+  }
 }
 
-
-.startLeaveLeft
-{
-    animation:leaveLeft 1s;
-    animation-fill-mode: forwards;
+.startLeaveLeft {
+  animation: leaveLeft 1s;
+  animation-fill-mode: forwards;
 }
 
-@keyframes leaveLeft
-{
-    0%
-    {
-        left: 0;
-    }
+@keyframes leaveLeft {
+  0% {
+    left: 0;
+  }
 
-    100%
-    {
-        left: -100vw;
-    }
+  100% {
+    left: -100vw;
+  }
 }
 
-.startAppearY
-{
-    animation:appearY 1s;
-    animation-fill-mode: forwards;
+.startAppearY {
+  animation: appearY 1s;
+  animation-fill-mode: forwards;
 }
 
-@keyframes appearY
-{
-    100%
-    {
-        top: 0;
-    }
+@keyframes appearY {
+  100% {
+    top: 0;
+  }
 }
 
-.startLeaveBottom
-{
-    animation:leaveBottom 1s;
-    animation-fill-mode: forwards;
+.startLeaveBottom {
+  animation: leaveBottom 1s;
+  animation-fill-mode: forwards;
 }
 
-@keyframes leaveBottom
-{
-    0%
-    {
-        top: 0;
-    }
+@keyframes leaveBottom {
+  0% {
+    top: 0;
+  }
 
-    100%
-    {
-        top: 100vh;
-    }
+  100% {
+    top: 100vh;
+  }
+}
+
+.startLeaveRight {
+  animation: leaveRight 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes leaveRight {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: 100vw;
+  }
 }

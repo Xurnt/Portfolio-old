@@ -10,15 +10,7 @@
 </head>
 <body class="layout">
     <header class="layout__top">
-        <p class="explanations">
-            <span>Clickez en dans la zone en dessous pour commencer à vous déplacer</span>
-            <span>Déplacez-vous avec la souris</span>
-            <span>Reclickez pour arrêter de vous déplacer</span>
-        </p>
-        <section class="title">
-            <h1 class="title__doctype">Portfolio</h1>
-            <h2 class="title__name">Ludovic Jolis</h2>
-        </section>
+
         <dl class="indicator">
             <dt>Vous êtes en mode </dt><dd id="mode"></dd>
         </dl>
@@ -57,8 +49,48 @@
 
     </section>
     <section class="creations" id="rightPannel">
+        <h1 class="creations__title">Grotte des creations</h1>
+        <aside class="creations__menu menu">
+            <h2 class="menu__title">Affichage</h2>
+            <div class="menu__buttons">
+                <figure class="menu__button" id="creationsListSelect">
+                    <img src="./assets/img/eng.jpg" alt="" class="menu__image">
+                    <figcaption class="menu__subtitle">Vue d'ensemble</figcaption>
+                </figure>
+                <figure class="menu__button" id="creationsShowSelect">
+                    <img src="./assets/img/fr.jpg" alt="" class="menu__image">
+                    <figcaption class="menu__subtitle">Creation par creation</figcaption>
+                </figure>
+            </div>
+
+        </aside>
+        <div class="creations__articles" id="creationsShow">
+            <section class="creations__list">
+                <article class="article">
+                    <h2 class="article__title">Titre test</h2>
+                    <figure class="article__content">
+                        <img src="" alt="" class="article__image" id="creation__actualImage">
+                        <figcaption id="creation__actualText" class="article__description"></figcaption>
+                    </figure>
+  
+    
+                </article>
+                <section class="creations__buttons" id="creation__buttons">
+                    <button class="creations__button" id="creations__previous">Precedent</button>
+                    <button class="creations__button" id="creations__next">Suivant</button>    
+                </section>   
+            </section>
+
+  
+        </div>
+        <div class="selection" id="creationsList">
+        </div>
+        <button class="creations__button creations__leave" id="exitCreations">Retour à la carte</button>
 
     </section>
+
+
+
     <section class="skills" id="bottomPannel">
         <h1 class="skills__title">Lac des competences</h1>
         <div class="skills__categories">      

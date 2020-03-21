@@ -1,0 +1,27 @@
+.selection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(10, 1fr);
+  overflow-y: scroll;
+  gap: 5%;
+  padding: 5%;
+}
+
+.selection__element {
+  text-align: center;
+  font-family: Comfortaa;
+  font-size: 2vw;
+}
+.selection__title {
+  width: 100%;
+  overflow: hidden;
+  white-space: normal;
+  word-break: break-all;
+}
+
+@media (min-width: 1000px), (max-height: 450px) {
+  .selection {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+  }
+}

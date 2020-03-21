@@ -347,19 +347,33 @@ let Portfolio = function(options) {
         }, 1000);
       });
 
-      document
-      .getElementById("exitSkills")
+    document.getElementById("exitSkills").addEventListener("click", function() {
+      document.getElementById("background").style.backgroundPositionX =
+        ((window.innerWidth - imageSize[0]) / 2).toString() + "px";
+      document.getElementById("background").style.backgroundPositionY =
+        ((window.innerHeight - imageSize[1]) / 2).toString() + "px";
+      document.getElementById("bottomPannel").classList.remove("startAppearY");
+      document.getElementById("bottomPannel").classList.add("startLeaveBottom");
+      setTimeout(function() {
+        document
+          .getElementById("bottomPannel")
+          .classList.remove("startLeaveBottom");
+      }, 1000);
+    });
+
+    document
+      .getElementById("exitCreations")
       .addEventListener("click", function() {
         document.getElementById("background").style.backgroundPositionX =
           ((window.innerWidth - imageSize[0]) / 2).toString() + "px";
         document.getElementById("background").style.backgroundPositionY =
           ((window.innerHeight - imageSize[1]) / 2).toString() + "px";
-        document.getElementById("bottomPannel").classList.remove("startAppearY");
-        document.getElementById("bottomPannel").classList.add("startLeaveBottom");
+        document.getElementById("rightPannel").classList.remove("startAppearX");
+        document.getElementById("rightPannel").classList.add("startLeaveRight");
         setTimeout(function() {
           document
-            .getElementById("bottomPannel")
-            .classList.remove("startLeaveBottom");
+            .getElementById("rightPannel")
+            .classList.remove("startLeaveRight");
         }, 1000);
       });
   }
@@ -498,6 +512,167 @@ let Portfolio = function(options) {
         tabCarouselSkills[centralCarouselSkills + 1]["category"];
     }
   }
+
+  let tabCreations = [
+    {
+      name: "a",
+      category: "dev",
+      src: "./assets/img/fr.jpg",
+      text: "blublulbulbulbublublublbulbulbuzadz",
+      alt: "goirejiogjerio"
+    },
+    {
+      name: "b",
+      category: "dev",
+      src: "./assets/img/fr.jpg",
+      text: "blublulbulbulbublublublbulbulbuzadz",
+      alt: "goirejiogjerio"
+    },
+    {
+      name: "c",
+      category: "dev",
+      src: "./assets/img/fr.jpg",
+      text: "blublulbulbulbublublublbulbulbuzadz",
+      alt: "goirejiogjerio"
+    },
+    {
+      name: "d",
+      category: "graph",
+      src: "./assets/img/eng.jpg",
+      text: "blublulbulbulbublublublbulbulbuzadz",
+      alt: "goirejiogjerio"
+    },
+    {
+      name: "e",
+      category: "graph",
+      src: "./assets/img/eng.jpg",
+      text: "blublulbulbulbublublublbulbulbuzadz",
+      alt: "goirejiogjerio"
+    },
+    {
+      name: "f",
+      category: "audio",
+      src: "./assets/img/esp.jpg",
+      text: "blublulbulbulbublublublbulbulbuzadz",
+      alt: "goirejiogjerio"
+    },
+    {
+      name: "g",
+      category: "audio",
+      src: "./assets/img/esp.jpg",
+      text: "blublulbulbulbublublublbulbulbuzadz",
+      alt: "goirejiogjerio"
+    },
+    {
+      name: "h",
+      category: "audio",
+      src: "./assets/img/esp.jpg",
+      text: "blublulbulbulbublublublbulbulbuzadz",
+      alt: "goirejiogjerio"
+    },
+    {
+      name: "i",
+      category: "other",
+      src: "./assets/img/eng.jpg",
+      text: "blublulbulbulbublublublbulbulbuzadz",
+      alt: "goirejiogjerio"
+    },
+    {
+      name: "j",
+      category: "other",
+      src: "./assets/img/eng.jpg",
+      text: "blublulbulbulbublublublbulbulbuzadz",
+      alt: "goirejiogjerio"
+    }
+  ];
+
+  let lengthCreations = tabCreations.length;
+  let actualCreation = 0;
+  actualImage = document.getElementById("creation__actualImage");
+  actualFigcaption = document.getElementById("creation__actualText");
+  rightPannel();
+  function rightPannel() {
+    buildSelection();
+    selectMenu();
+    displayCreation();
+    prevNextCreations();
+  }
+
+  function displayCreation() {
+    actualImage.src = tabCreations[actualCreation]["src"];
+    actualImage.alt = tabCreations[actualCreation]["alt"];
+    actualFigcaption.innerHTML = tabCreations[actualCreation]["text"];
+  }
+
+  function buildSelection() {
+    for (let i = 0; i < lengthCreations; i++) {
+      let figure = document
+        .getElementById("creationsList")
+        .appendChild(document.createElement("figure"));
+      figure.classList.add("selection__element");
+      figure.id = "creation__" + i.toString();
+      figure.dataset.category = tabCreations[i]["category"];
+      figure.addEventListener("click", pickCreationById);
+      let img = figure.appendChild(document.createElement("img"));
+      img.classList.add("selection__image");
+      img.src = tabCreations[i]["src"];
+      img.alt = tabCreations[i]["alt"];
+      let figcaption = figure.appendChild(document.createElement("figcaption"));
+      figcaption.classList.add("selection__title");
+      figcaption.innerHTML = tabCreations[i]["text"];
+    }
+  }
+
+  function selectMenu() {
+    document
+      .getElementById("creationsListSelect")
+      .addEventListener("click", appearList);
+    document
+      .getElementById("creationsShowSelect")
+      .addEventListener("click", appearShow);
+  }
+
+  function appearList() {
+    document.getElementById("creationsList").style.display = "grid";
+    document.getElementById("creationsShow").style.display = "none";
+    document.getElementById("creation__buttons").style.display = "none";
+  }
+  function appearShow() {
+    document.getElementById("creationsList").style.display = "none";
+    document.getElementById("creationsShow").style.display = "flex";
+    document.getElementById("creation__buttons").style.display = "flex";
+  }
+  function prevNextCreations() {
+    document
+      .getElementById("creations__previous")
+      .addEventListener("click", function() {
+        if (actualCreation == 0) {
+          actualCreation = lengthCreations - 1;
+        } else {
+          actualCreation -= 1;
+        }
+        displayCreation();
+        console.log(actualCreation);
+      });
+    document
+      .getElementById("creations__next")
+      .addEventListener("click", function() {
+        if (actualCreation == lengthCreations - 1) {
+          actualCreation = 0;
+        } else {
+          actualCreation += 1;
+        }
+        displayCreation();
+        console.log(actualCreation);
+      });
+  }
+
+  function pickCreationById() {
+    actualCreation = parseInt(this.id.replace("creation__", ""));
+    displayCreation();
+    appearShow();
+  }
+
   return {
     init: init
   };
