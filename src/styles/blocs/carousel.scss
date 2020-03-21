@@ -6,7 +6,7 @@
 }
 
 .carousel__arrow {
-  flex-basis: 10vw;
+  flex-basis: 5vw;
   align-self: center;
   cursor: pointer;
 }
@@ -16,4 +16,14 @@
   justify-content: space-evenly;
   flex-direction: column;
   flex-basis: 40vw;
+  align-items: center;
 }
+
+@media (min-width:1000px), (max-height:450px){
+  .carousel__content {
+    flex-direction: row; 
+    flex-basis: 70vw;
+
+  }
+
+ }

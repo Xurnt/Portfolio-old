@@ -47,3 +47,21 @@
     }
 }
 
+.startLeaveBottom
+{
+    animation:leaveBottom 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes leaveBottom
+{
+    0%
+    {
+        top: 0;
+    }
+
+    100%
+    {
+        top: 100vh;
+    }
+}

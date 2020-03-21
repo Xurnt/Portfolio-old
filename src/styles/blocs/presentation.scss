@@ -4,10 +4,11 @@
     width: 100vw;
     position: absolute;
     left: -100vw;
-    background-image:url('../../assets/img/Leftpannel.jpg');
+    background-image:linear-gradient(to left, white, #3cf72c);
     background-size: cover;
     z-index: 20;
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     align-items: stretch;
     padding: 5%;
@@ -16,27 +17,58 @@
 .presentation__title
 {
     font-family: Ballet Harmony;
-    font-size: 4vw;
-    text-align: end;
+    font-size: 9vw;
+    text-align: center;
+    flex-basis: 10%;
+    margin-top: 5%;
 }
 
 .presentation__content
 {
     display:flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: stretch;
+    height: 100%;
 }
 
 .presentation__profilepicture
 {
     align-self: center;
-    width: 20vw;
-    border-radius: 50%;
-    border: solid 25px white;
+    width: 30vw;
+    flex-basis: 15%;
+
 }
 
 .presentation__text
 {
     text-align: center;
+    font-family: Comfortaa;
+    font-size:3.5vw;
+    flex-basis: 50%;
+}
+
+.presentation__exit{
+    cursor: pointer;
+    background-color: transparent;
+    font-family: Comfortaa;
+    font-size: 6vw;
+    border: none;
+    flex-basis: 15%;
+}
+
+@media (min-width:1000px), (max-height:450px){
+    .presentation__text{
+        font-size: 1vw;
+    }
+
+    .presentation__content{
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .presentation__exit{
+        font-size: 3vw;
+    }
+
 }

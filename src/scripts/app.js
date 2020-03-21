@@ -346,6 +346,22 @@ let Portfolio = function(options) {
             .classList.remove("startLeaveLeft");
         }, 1000);
       });
+
+      document
+      .getElementById("exitSkills")
+      .addEventListener("click", function() {
+        document.getElementById("background").style.backgroundPositionX =
+          ((window.innerWidth - imageSize[0]) / 2).toString() + "px";
+        document.getElementById("background").style.backgroundPositionY =
+          ((window.innerHeight - imageSize[1]) / 2).toString() + "px";
+        document.getElementById("bottomPannel").classList.remove("startAppearY");
+        document.getElementById("bottomPannel").classList.add("startLeaveBottom");
+        setTimeout(function() {
+          document
+            .getElementById("bottomPannel")
+            .classList.remove("startLeaveBottom");
+        }, 1000);
+      });
   }
 
   function ratioImages(image) {
@@ -397,12 +413,12 @@ let Portfolio = function(options) {
     {
       name: "i",
       category: "other",
-      src: "./assets/img/profil.jpg"
+      src: "./assets/img/eng.jpg"
     },
     {
       name: "j",
       category: "other",
-      src: "./assets/img/profil.jpg"
+      src: "./assets/img/eng.jpg"
     }
   ];
   let centralCarouselSkills = 0;
