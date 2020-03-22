@@ -12,6 +12,7 @@
   grid-template-areas:
     "top"
     "content" "button" "menu";
+    gap:2%;
 }
 
 .creations__title {
@@ -31,16 +32,15 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
-}
-
-.creations__list {
   overflow: hidden;
-  height: 100%;
+  background-color:rgba(39, 2, 2, 0.658);
+  color:white;
 }
 
 .creations__buttons {
   height: 20%;
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   flex-basis: 20%;
 }
@@ -49,13 +49,22 @@
   cursor: pointer;
   background-color: transparent;
   font-family: Comfortaa;
-  font-size: 4vw;
   border: none;
   padding: 2%;
+  font-size: 2vw;
+  color: white;
+
 }
 
 .creations__leave {
   grid-area: button;
+  font-size: 4vw;
+  color: black;
+}
+
+.creations__leave:hover{
+  animation: hoverButtonBig 1s;
+  animation-iteration-count: infinite;
 }
 
 @media (min-width: 1000px), (max-height: 450px) {
@@ -65,7 +74,7 @@
     grid-template-areas:
       "top menu"
       "content menu"
-      "button button";
+      "button menu";
   }
 
   .creations__list {

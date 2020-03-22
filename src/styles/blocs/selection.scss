@@ -1,10 +1,10 @@
 .selection {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(10, 1fr);
+  display: flex;
+  flex-direction: column;
   overflow-y: scroll;
-  gap: 5%;
   padding: 5%;
+  cursor: pointer;
+  background-color:rgba(39, 2, 2, 0.658);
 }
 
 .selection__element {
@@ -14,14 +14,53 @@
 }
 .selection__title {
   width: 100%;
-  overflow: hidden;
   white-space: normal;
   word-break: break-all;
+  color: white;
 }
+
+
+.selection__categoryTitle{
+  text-align: center;
+  font-family: Ballet Harmony;
+  color: white;
+  font-size: 6vw;
+}
+
+.selection__devTitle{
+  grid-area:devTitre;
+}
+
+.selection__graphTitle{
+  grid-area:graphTitre;
+}
+
+.selection__audioTitle{
+  grid-area:audioTitre;
+}
+
+.selection__content {
+  display: grid;
+  grid-area: dev;
+  grid-template-columns: 1fr 1fr;
+  gap: 5%;
+  padding: 5%;
+}
+
 
 @media (min-width: 1000px), (max-height: 450px) {
   .selection {
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+  }
+  .selection__dev {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .selection__graph {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .selection__audio {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

@@ -65,25 +65,40 @@
 
         </aside>
         <div class="creations__articles" id="creationsShow">
-            <section class="creations__list">
                 <article class="article">
                     <h2 class="article__title">Titre test</h2>
                     <figure class="article__content">
-                        <img src="" alt="" class="article__image" id="creation__actualImage">
                         <figcaption id="creation__actualText" class="article__description"></figcaption>
+                        <img src="" alt="" class="article__image" id="creation__actualImage">
+
+                        <div class="creations__buttons" id="creation__buttons">
+                            <button class="creations__button" id="creations__previous">Precedent</button>
+                            <button class="creations__button" id="creations__next">Suivant</button>    
+                        </div>  
                     </figure>
-  
+
     
                 </article>
-                <section class="creations__buttons" id="creation__buttons">
-                    <button class="creations__button" id="creations__previous">Precedent</button>
-                    <button class="creations__button" id="creations__next">Suivant</button>    
-                </section>   
-            </section>
+ 
 
   
         </div>
         <div class="selection" id="creationsList">
+            <h2 class="selection__categoryTitle selection__devTitle">
+                Dévellopement Web
+            </h2>
+            <div class="selection__content" id="selection__dev"></div>
+
+            <h2 class="selection__categoryTitle selection__graphTitle ">
+                Graphisme
+            </h2>
+            <div class="selection__content" id="selection__graph"></div>
+
+            <h2 class="selection__categoryTitle selection__audioTitle ">
+                Audiovisuel
+            </h2>
+            <div class="selection__content" id="selection__audio"></div>
+
         </div>
         <button class="creations__button creations__leave" id="exitCreations">Retour à la carte</button>
 
@@ -101,7 +116,7 @@
         </div>
         <h2 class="skills__actual"></h2>
         <div class="carousel">
-            <img src="https://dummyimage.com/100x100/ff0000/fff" alt="" class="carousel__arrow" id="skills__left">
+            <img src="./assets/img/fr.jpg" alt="" class="carousel__arrow" id="skills__left">
             <div class="carousel__content">
 
                 <figure class="skill">
@@ -117,7 +132,7 @@
                     <figcaption id="skills__thirdText" class="skill__name"></figcaption>
                 </figure>
            </div>
-            <img src="https://dummyimage.com/100x100/ff0000/fff" alt="" class="carousel__arrow" id="skills__right">
+            <img src="./assets/img/fr.jpg" alt="" class="carousel__arrow" id="skills__right">
         </div>
         <button class="skills__exit" id="exitSkills">Retourner à la carte</button>
 

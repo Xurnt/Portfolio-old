@@ -45,8 +45,13 @@
   cursor: pointer;
   background-color: transparent;
   font-family: Comfortaa;
-  font-size: 2vw;
+  font-size: 4vw;
   border: none;
+}
+
+.skills__exit:hover{
+  animation: hoverButtonBig 1s;
+  animation-iteration-count: infinite;
 }
 
 @media (min-width:1000px), (max-height:450px){

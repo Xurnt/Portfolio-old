@@ -64,3 +64,18 @@
     left: 100vw;
   }
 }
+
+
+@keyframes hoverButtonBig{
+  0%{
+    font-size: 4vw;
+  }
+
+  50%{
+    font-size: 5vw;
+  }
+
+  100%{
+    font-size: 4vw;
+  }
+}

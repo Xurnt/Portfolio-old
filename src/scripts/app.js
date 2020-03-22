@@ -39,6 +39,7 @@ let Portfolio = function(options) {
     } else {
       mobile = false;
     }
+    rightPannel();
 
     document.getElementById("background").style.backgroundImage =
       "url(" + srcImg + ")";
@@ -572,25 +573,29 @@ let Portfolio = function(options) {
     },
     {
       name: "i",
-      category: "other",
+      category: "audio",
       src: "./assets/img/eng.jpg",
       text: "blublulbulbulbublublublbulbulbuzadz",
       alt: "goirejiogjerio"
     },
     {
       name: "j",
-      category: "other",
+      category: "audio",
       src: "./assets/img/eng.jpg",
       text: "blublulbulbulbublublublbulbulbuzadz",
       alt: "goirejiogjerio"
     }
   ];
-
   let lengthCreations = tabCreations.length;
   let actualCreation = 0;
   actualImage = document.getElementById("creation__actualImage");
   actualFigcaption = document.getElementById("creation__actualText");
-  rightPannel();
+
+  let listBloc=document.getElementById("creationsList");
+  let devBloc=document.getElementById('selection__dev');
+  let graphBloc=document.getElementById('selection__graph');
+  let audioBloc=document.getElementById('selection__audio');
+
   function rightPannel() {
     buildSelection();
     selectMenu();
@@ -605,10 +610,23 @@ let Portfolio = function(options) {
   }
 
   function buildSelection() {
+    let actualBloc;
+    tabCategory=[0,0,0];
+    lengthCategory=tabCategory.length;
     for (let i = 0; i < lengthCreations; i++) {
-      let figure = document
-        .getElementById("creationsList")
-        .appendChild(document.createElement("figure"));
+      if(tabCreations[i]["category"]=="dev"){
+        tabCategory[0]+=1;
+        actualBloc=devBloc;
+      }
+      else if (tabCreations[i]["category"]=="graph") {
+        tabCategory[1]+=1;
+        actualBloc=graphBloc;
+      }
+      else if (tabCreations[i]["category"]=="audio") {
+        tabCategory[2]+=1; 
+        actualBloc=audioBloc;
+      }
+      let figure = actualBloc.appendChild(document.createElement("figure"));
       figure.classList.add("selection__element");
       figure.id = "creation__" + i.toString();
       figure.dataset.category = tabCreations[i]["category"];
@@ -621,6 +639,28 @@ let Portfolio = function(options) {
       figcaption.classList.add("selection__title");
       figcaption.innerHTML = tabCreations[i]["text"];
     }
+    if(mobile){
+       numberColumn=2;
+    }
+    else{
+
+       numberColumn=4;
+    }
+    let rowNumber=[];
+    for (let i = 0; i < 3; i++) {
+      if(tabCategory[i]%numberColumn==0){
+        rowNumber[i]=tabCategory[i]/numberColumn;
+      }
+      else{
+        rowNumber[i]=Math.floor(tabCategory[i]/numberColumn)+1;
+      }
+    }  
+    devBloc.style.gridTemplateRows="repeat("+(rowNumber[0]).toString()+", 1fr)";
+    graphBloc.style.gridTemplateRows="repeat("+(rowNumber[1]).toString()+", 1fr)";
+    audioBloc.style.gridTemplateRows="repeat("+(rowNumber[2]).toString()+", 1fr)";
+
+
+  
   }
 
   function selectMenu() {
@@ -633,12 +673,12 @@ let Portfolio = function(options) {
   }
 
   function appearList() {
-    document.getElementById("creationsList").style.display = "grid";
+    listBloc.style.display = "flex";
     document.getElementById("creationsShow").style.display = "none";
     document.getElementById("creation__buttons").style.display = "none";
   }
   function appearShow() {
-    document.getElementById("creationsList").style.display = "none";
+    listBloc.style.display = "none";
     document.getElementById("creationsShow").style.display = "flex";
     document.getElementById("creation__buttons").style.display = "flex";
   }
@@ -672,6 +712,7 @@ let Portfolio = function(options) {
     displayCreation();
     appearShow();
   }
+  
 
   return {
     init: init
