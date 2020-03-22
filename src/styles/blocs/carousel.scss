@@ -11,6 +11,13 @@
   cursor: pointer;
 }
 
+.carousel__arrow--back {
+  transform: rotate(-90deg);
+}
+.carousel__arrow--next {
+  transform: rotate(90deg);
+}
+
 .carousel__content {
   display: flex;
   justify-content: space-evenly;
@@ -19,11 +26,16 @@
   align-items: center;
 }
 
-@media (min-width:1000px), (max-height:450px){
+@media (min-width: 1000px), (max-height: 450px) {
   .carousel__content {
-    flex-direction: row; 
+    flex-direction: row;
     flex-basis: 70vw;
-
   }
 
- }
+  .carousel__arrow--back {
+    transform: rotate(180deg);
+  }
+  .carousel__arrow--next {
+    transform: rotate(0deg);
+  }
+}

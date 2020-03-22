@@ -17,7 +17,6 @@ let Portfolio = function(options) {
   let mobile;
   let steps = ["a", "a"];
   let backgroundActualPosition = ["a", "a"];
-  let mode;
 
   let colorDecimal = [0, 0, 0];
   let colorHexadecimal;
@@ -31,8 +30,6 @@ let Portfolio = function(options) {
     carousel();
     backgroundFactor = backgroundValue;
 
-    mode = "ARRET";
-    //document.getElementById("mode").innerHTML = mode;
     document.querySelector("main").style.background = "#000000";
     if (screen.height > screen.width) {
       mobile = true;
@@ -101,17 +98,14 @@ let Portfolio = function(options) {
         movementActive = setInterval(function() {
           vectorDirectionPC("mousemove");
         }, 17); //17 ms = 60fps
-        mode = "DÉPLACEMENT";
         start = false;
       } else {
         clearInterval(movementActive);
         start = true;
-        mode = "ARRET";
       }
     }
 
     //          }
-    // document.getElementById("mode").innerHTML = mode;
   }
 
   let touchstartX = 0;
@@ -151,7 +145,6 @@ let Portfolio = function(options) {
               .style.backgroundPositionY.replace("px", "")
           ) + yDiff;
 
-        document.getElementById("mode").innerHTML = xDiff;
         swipe();
         touchstartX = touchendX;
         touchstartY = touchendY;
@@ -165,9 +158,7 @@ let Portfolio = function(options) {
       backgroundActualPosition[0].toString() + "px";
     document.getElementById("background").style.backgroundPositionY =
       backgroundActualPosition[1].toString() + "px";
-    document.getElementById("mode").innerHTML = document.getElementById(
-      "background"
-    ).style.backgroundPositionX;
+
     limits();
   }
 
@@ -241,8 +232,6 @@ let Portfolio = function(options) {
 
   function limits() {
     if (backgroundActualPosition[0] > 0) {
-      document.getElementById("mode").innerHTML = "AAAAAAAAA";
-
       document.getElementById("leftPannel").classList.add("startAppearX");
       document.getElementById("background").style.backgroundPositionX = "0px";
       if (!mobile) {
@@ -386,54 +375,88 @@ let Portfolio = function(options) {
 
   let tabCarouselSkills = [
     {
-      name: "a",
+      name: "HTML5",
       category: "dev",
-      src: "./assets/img/fr.jpg"
+      src: "./assets/img/skills/HTML5.png",
+      alt: "logo HTML5"
     },
     {
-      name: "b",
+      name: "CSS",
       category: "dev",
-      src: "./assets/img/fr.jpg"
+      src: "./assets/img/skills/CSS3.png",
+      alt: "logo CSS"
     },
     {
-      name: "c",
+      name: "JS",
       category: "dev",
-      src: "./assets/img/fr.jpg"
+      src: "./assets/img/skills/JS.png",
+      alt: "logo Javascript"
     },
     {
-      name: "d",
+      name: "PHP",
+      category: "dev",
+      src: "./assets/img/skills/PHP.png",
+      alt: "logo PHP"
+    },
+    {
+      name: "Symfony",
+      category: "dev",
+      src: "./assets/img/skills/Symfony.png",
+      alt: "logo Symfony"
+    },
+    {
+      name: "Photoshop",
       category: "graph",
-      src: "./assets/img/eng.jpg"
+      src: "./assets/img/skills/Photoshop.png",
+      alt: "logo Photoshop"
     },
     {
-      name: "e",
+      name: "Illustrator",
       category: "graph",
-      src: "./assets/img/eng.jpg"
+      src: "./assets/img/skills/Illustrator.png",
+      alt: "logo Illustrator"
     },
     {
-      name: "f",
+      name: "After Effect",
+      category: "graph",
+      src: "./assets/img/skills/AfterEffect.png",
+      alt: "logo After Effect"
+    },
+    {
+      name: "Premiere",
       category: "audio",
-      src: "./assets/img/esp.jpg"
+      src: "./assets/img/skills/Premiere.png",
+      alt: "logo Premiere"
     },
     {
-      name: "g",
+      name: "Cubase",
       category: "audio",
-      src: "./assets/img/esp.jpg"
+      src: "./assets/img/skills/Cubase.png",
+      alt: "logo Cubase"
     },
     {
-      name: "h",
+      name: "Construct2",
       category: "audio",
-      src: "./assets/img/esp.jpg"
+      src: "./assets/img/skills/Construct2.png",
+      alt: "logo Construct2"
     },
     {
-      name: "i",
+      name: "Office",
       category: "other",
-      src: "./assets/img/eng.jpg"
+      src: "./assets/img/skills/Office.png",
+      alt: "logo Office"
     },
     {
-      name: "j",
+      name: "SCRUM",
       category: "other",
-      src: "./assets/img/eng.jpg"
+      src: "./assets/img/skills/SCRUM.png",
+      alt: "logo SCRUM"
+    },
+    {
+      name: "Communication",
+      category: "other",
+      src: "./assets/img/skills/Communication.png",
+      alt: "logo Communication"
     }
   ];
   let centralCarouselSkills = 0;
@@ -482,71 +505,81 @@ let Portfolio = function(options) {
   function printCarousel() {
     document.getElementById("skills__secondImage").src =
       tabCarouselSkills[centralCarouselSkills]["src"];
+    document.getElementById("skills__secondImage").alt =
+      tabCarouselSkills[centralCarouselSkills]["alt"];
     document.getElementById("skills__secondText").innerHTML =
-      tabCarouselSkills[centralCarouselSkills]["category"];
+      tabCarouselSkills[centralCarouselSkills]["name"];
     if (centralCarouselSkills == 0) {
       document.getElementById("skills__firstImage").src =
         tabCarouselSkills[lengthCarouselSkills - 1]["src"];
+      document.getElementById("skills__firstImage").alt =
+        tabCarouselSkills[lengthCarouselSkills - 1]["alt"];
       document.getElementById("skills__firstText").innerHTML =
-        tabCarouselSkills[lengthCarouselSkills - 1]["category"];
+        tabCarouselSkills[lengthCarouselSkills - 1]["name"];
       document.getElementById("skills__thirdImage").src =
         tabCarouselSkills[centralCarouselSkills + 1]["src"];
+      document.getElementById("skills__thirdImage").alt =
+        tabCarouselSkills[centralCarouselSkills + 1]["alt"];
       document.getElementById("skills__thirdText").innerHTML =
-        tabCarouselSkills[centralCarouselSkills + 1]["category"];
+        tabCarouselSkills[centralCarouselSkills + 1]["name"];
     } else if (centralCarouselSkills == lengthCarouselSkills - 1) {
       document.getElementById("skills__firstImage").src =
         tabCarouselSkills[centralCarouselSkills - 1]["src"];
+      document.getElementById("skills__firstImage").alt =
+        tabCarouselSkills[centralCarouselSkills - 1]["alt"];
       document.getElementById("skills__firstText").innerHTML =
-        tabCarouselSkills[centralCarouselSkills - 1]["category"];
+        tabCarouselSkills[centralCarouselSkills - 1]["name"];
       document.getElementById("skills__thirdImage").src =
         tabCarouselSkills[0]["src"];
+      document.getElementById("skills__thirdImage").alt =
+        tabCarouselSkills[0]["alt"];
       document.getElementById("skills__thirdText").innerHTML =
-        tabCarouselSkills[0]["category"];
+        tabCarouselSkills[0]["name"];
     } else {
       document.getElementById("skills__firstImage").src =
         tabCarouselSkills[centralCarouselSkills - 1]["src"];
       document.getElementById("skills__firstText").innerHTML =
-        tabCarouselSkills[centralCarouselSkills - 1]["category"];
+        tabCarouselSkills[centralCarouselSkills - 1]["name"];
       document.getElementById("skills__thirdImage").src =
         tabCarouselSkills[centralCarouselSkills + 1]["src"];
       document.getElementById("skills__thirdText").innerHTML =
-        tabCarouselSkills[centralCarouselSkills + 1]["category"];
+        tabCarouselSkills[centralCarouselSkills + 1]["name"];
     }
   }
 
   let tabCreations = [
     {
-      name: "a",
+      name: "f",
       category: "dev",
-      src: "./assets/img/fr.jpg",
+      src: "./assets/img/esp.jpg",
       text: "blublulbulbulbublublublbulbulbuzadz",
       alt: "goirejiogjerio"
     },
     {
-      name: "b",
+      name: "f",
       category: "dev",
-      src: "./assets/img/fr.jpg",
+      src: "./assets/img/esp.jpg",
       text: "blublulbulbulbublublublbulbulbuzadz",
       alt: "goirejiogjerio"
     },
     {
-      name: "c",
+      name: "f",
       category: "dev",
-      src: "./assets/img/fr.jpg",
+      src: "./assets/img/esp.jpg",
       text: "blublulbulbulbublublublbulbulbuzadz",
       alt: "goirejiogjerio"
     },
     {
-      name: "d",
+      name: "f",
       category: "graph",
-      src: "./assets/img/eng.jpg",
+      src: "./assets/img/esp.jpg",
       text: "blublulbulbulbublublublbulbulbuzadz",
       alt: "goirejiogjerio"
     },
     {
-      name: "e",
+      name: "f",
       category: "graph",
-      src: "./assets/img/eng.jpg",
+      src: "./assets/img/esp.jpg",
       text: "blublulbulbulbublublublbulbulbuzadz",
       alt: "goirejiogjerio"
     },
@@ -591,10 +624,10 @@ let Portfolio = function(options) {
   actualImage = document.getElementById("creation__actualImage");
   actualFigcaption = document.getElementById("creation__actualText");
 
-  let listBloc=document.getElementById("creationsList");
-  let devBloc=document.getElementById('selection__dev');
-  let graphBloc=document.getElementById('selection__graph');
-  let audioBloc=document.getElementById('selection__audio');
+  let listBloc = document.getElementById("creationsList");
+  let devBloc = document.getElementById("selection__dev");
+  let graphBloc = document.getElementById("selection__graph");
+  let audioBloc = document.getElementById("selection__audio");
 
   function rightPannel() {
     buildSelection();
@@ -611,20 +644,18 @@ let Portfolio = function(options) {
 
   function buildSelection() {
     let actualBloc;
-    tabCategory=[0,0,0];
-    lengthCategory=tabCategory.length;
+    tabCategory = [0, 0, 0];
+    lengthCategory = tabCategory.length;
     for (let i = 0; i < lengthCreations; i++) {
-      if(tabCreations[i]["category"]=="dev"){
-        tabCategory[0]+=1;
-        actualBloc=devBloc;
-      }
-      else if (tabCreations[i]["category"]=="graph") {
-        tabCategory[1]+=1;
-        actualBloc=graphBloc;
-      }
-      else if (tabCreations[i]["category"]=="audio") {
-        tabCategory[2]+=1; 
-        actualBloc=audioBloc;
+      if (tabCreations[i]["category"] == "dev") {
+        tabCategory[0] += 1;
+        actualBloc = devBloc;
+      } else if (tabCreations[i]["category"] == "graph") {
+        tabCategory[1] += 1;
+        actualBloc = graphBloc;
+      } else if (tabCreations[i]["category"] == "audio") {
+        tabCategory[2] += 1;
+        actualBloc = audioBloc;
       }
       let figure = actualBloc.appendChild(document.createElement("figure"));
       figure.classList.add("selection__element");
@@ -639,28 +670,25 @@ let Portfolio = function(options) {
       figcaption.classList.add("selection__title");
       figcaption.innerHTML = tabCreations[i]["text"];
     }
-    if(mobile){
-       numberColumn=2;
+    if (mobile) {
+      numberColumn = 2;
+    } else {
+      numberColumn = 4;
     }
-    else{
-
-       numberColumn=4;
-    }
-    let rowNumber=[];
+    let rowNumber = [];
     for (let i = 0; i < 3; i++) {
-      if(tabCategory[i]%numberColumn==0){
-        rowNumber[i]=tabCategory[i]/numberColumn;
+      if (tabCategory[i] % numberColumn == 0) {
+        rowNumber[i] = tabCategory[i] / numberColumn;
+      } else {
+        rowNumber[i] = Math.floor(tabCategory[i] / numberColumn) + 1;
       }
-      else{
-        rowNumber[i]=Math.floor(tabCategory[i]/numberColumn)+1;
-      }
-    }  
-    devBloc.style.gridTemplateRows="repeat("+(rowNumber[0]).toString()+", 1fr)";
-    graphBloc.style.gridTemplateRows="repeat("+(rowNumber[1]).toString()+", 1fr)";
-    audioBloc.style.gridTemplateRows="repeat("+(rowNumber[2]).toString()+", 1fr)";
-
-
-  
+    }
+    devBloc.style.gridTemplateRows =
+      "repeat(" + rowNumber[0].toString() + ", 1fr)";
+    graphBloc.style.gridTemplateRows =
+      "repeat(" + rowNumber[1].toString() + ", 1fr)";
+    audioBloc.style.gridTemplateRows =
+      "repeat(" + rowNumber[2].toString() + ", 1fr)";
   }
 
   function selectMenu() {
@@ -712,7 +740,6 @@ let Portfolio = function(options) {
     displayCreation();
     appearShow();
   }
-  
 
   return {
     init: init

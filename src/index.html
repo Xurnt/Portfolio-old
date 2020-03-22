@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
+
+    <script src="./scripts/loader.js">
+
+    </script>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,17 +14,15 @@
 
 </head>
 <body class="layout">
-    <header class="layout__top">
 
-        <dl class="indicator">
-            <dt>Vous êtes en mode </dt><dd id="mode"></dd>
-        </dl>
-
-
-    </header>
-    <main class="layout_main">
+    <main class="layout__main">
         <div class="carte" id="background"></div>
     </main>
+    <section class="loader" id="loader">
+        <h1 class="loader__title">Portfolio</h1>
+        <h2 class="loader__subtitle">Ludovic Jolis</h2>
+        <span class="loader__text">Chargement en cours...</span>
+    </section>
     <section class="presentation" id="leftPannel">
         <h1 class="presentation__title">Prairie des presentations</h1>
 
@@ -116,7 +119,7 @@
         </div>
         <h2 class="skills__actual"></h2>
         <div class="carousel">
-            <img src="./assets/img/fr.jpg" alt="" class="carousel__arrow" id="skills__left">
+            <img src="./assets/img/skills/arrow.png" alt="go to previous skill" class="carousel__arrow carousel__arrow--back" id="skills__left">
             <div class="carousel__content">
 
                 <figure class="skill">
@@ -132,7 +135,7 @@
                     <figcaption id="skills__thirdText" class="skill__name"></figcaption>
                 </figure>
            </div>
-            <img src="./assets/img/fr.jpg" alt="" class="carousel__arrow" id="skills__right">
+            <img src="./assets/img/skills/arrow.png" alt="go to next skill" class="carousel__arrow carousel__arrow--next" id="skills__right">
         </div>
         <button class="skills__exit" id="exitSkills">Retourner à la carte</button>
 

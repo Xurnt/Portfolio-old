@@ -34,14 +34,18 @@
   font-size: 4vw;
   font-family: Comfortaa;
   text-align: center;
+}
 
+.skills__category:hover {
+  animation: hoverButtonSmall 1s;
+  animation-iteration-count: infinite;
 }
 
 .skills_button {
   cursor: pointer;
 }
 
-.skills__exit{
+.skills__exit {
   cursor: pointer;
   background-color: transparent;
   font-family: Comfortaa;
@@ -49,18 +53,18 @@
   border: none;
 }
 
-.skills__exit:hover{
+.skills__exit:hover {
   animation: hoverButtonBig 1s;
   animation-iteration-count: infinite;
 }
 
-@media (min-width:1000px), (max-height:450px){
-.skills__categories{
-  flex-basis: 20vh;
-  width: 70%;
-  align-self: center;
-  margin-top: 5%;
-}
+@media (min-width: 1000px), (max-height: 450px) {
+  .skills__categories {
+    flex-basis: 20vh;
+    width: 70%;
+    align-self: center;
+    margin-top: 5%;
+  }
 
   .skills__category {
     font-size: 2vw;
